@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="quixoria">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>quixoria</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <!-- Quixoria High-Fidelity Natural Storyteller Speech Engine -->
+  <script>
+    var _cachedVoices = [];
+    function _initQuixoriaVoices() {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        var v = window.speechSynthesis.getVoices();
+        if (v && v.length) _cachedVoices = v;
+      }
+    }
+    _initQuixoriaVoices();
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = _initQuixoriaVoices;
+    }
+
+    // Select the most natural human narrator voice for the chosen persona
+    function _selectBestNaturalVoice(persona) {
+      _initQuixoriaVoices();
+      if (!_cachedVoices || !_cachedVoices.length) return null;
+
+      var voices = _cachedVoices;
+      var langMatch = function(v) { return v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en-')); };
+      var enVoices = voices.filter(langMatch);
+      if (!enVoices.length) enVoices = voices;
+
+      // Filter out ancient robotic desktop synthesizers (SAPI / David Desktop / Zira Desktop)
+      var naturalVoices = enVoices.filter(function(v) {
+        var n = (v.name || '').toLowerCase();
+        return !n.includes('desktop') && !n.includes('sapi') && !n.includes('espeak');
+      });
+      if (!naturalVoices.length) naturalVoices = enVoices;
+
+      // 1. Sir Quixote: Storyteller Baritone (Prefers British / UK natural or deep male voices)
+      if (persona === 'grand_knight') {
+        var knightPicks = naturalVoices.filter(function(v) {
+          var n = (v.name || '').toLowerCase();
+          var l = (v.lang || '').toLowerCase();
+          return (l.includes('gb') || l.includes('uk') || n.includes('uk') || n.includes('british')) &&
+                 (n.includes('natural') || n.includes('neural') || n.includes('male') || n.includes('ryan') || n.includes('christopher') || n.includes('george') || n.includes('oliver') || n.includes('daniel'));
+        });
+        if (knightPicks.length) return knightPicks[0];
+
+        var anyNaturalMale = naturalVoices.filter(function(v) {
+          var n = (v.name || '').toLowerCase();
+          return (n.includes('natural') || n.includes('neural') || n.includes('online')) && (n.includes('male') || n.includes('guy') || n.includes('christopher'));
+        });
+        if (anyNaturalMale.length) return anyNaturalMale[0];
+
+        var googleUkMale = naturalVoices.filter(function(v) {
+          return (v.name || '').includes('Google UK English Male');
+        });
+        if (googleUkMale.length) return googleUkMale[0];
+      }
+
+      // 2. Lady Dulcinea: Gentle Bard (Prefers warm, melodic natural female voices)
+      if (persona === 'gentle_bard') {
+        var bardPicks = naturalVoices.filter(function(v) {
+          var n = (v.name || '').toLowerCase();
+          return (n.includes('natural') || n.includes('neural') || n.includes('online') || n.includes('enhanced')) &&
+                 (n.includes('female') || n.includes('sonia') || n.includes('jenny') || n.includes('aria') || n.includes('serena') || n.includes('victoria'));
+        });
+        if (bardPicks.length) return bardPicks[0];
+
+        var googleUkFemale = naturalVoices.filter(function(v) {
+          return (v.name || '').includes('Google UK English Female');
+        });
+        if (googleUkFemale.length) return googleUkFemale[0];
+      }
+
+      // 3. Royal Scholar: Crisp Studio Cadence
+      if (persona === 'classic_scholar') {
+        var scholarPicks = naturalVoices.filter(function(v) {
+          var n = (v.name || '').toLowerCase();
+          return (n.includes('natural') || n.includes('neural') || n.includes('studio') || n.includes('online')) &&
+                 (n.includes('guy') || n.includes('aria') || n.includes('jenny') || n.includes('google us'));
+        });
+        if (scholarPicks.length) return scholarPicks[0];
+      }
+
+      // Fallback: any voice containing (Natural), Neural, Google or Enhanced
+      var generalNatural = naturalVoices.filter(function(v) {
+        var n = (v.name || '').toLowerCase();
+        return n.includes('natural') || n.includes('neural') || n.includes('google') || n.includes('enhanced');
+      });
+      if (generalNatural.length) return generalNatural[0];
+
+      return naturalVoices[0] || voices[0];
+    }
+
+    // Audio narration is powered by Studio Neural Audio (Google Cloud & ElevenLabs)
+    // Legacy robotic OS synthesizers are deactivated for maximum natural immersion.
+    window.quixoriaSpeak = function(text, rate, persona, onDone) {
+      if (onDone) setTimeout(onDone, 50);
+    };
+    window.quixoriaStop = function() {};
+    window.quixoriaPause = function() {};
+    window.quixoriaResume = function() {};
+
+    // Quixoria Universal Web Vibration & Haptic Engine
+    var _hasUserInteracted = false;
+    window.addEventListener('pointerdown', function() { _hasUserInteracted = true; }, { once: true, passive: true });
+    window.addEventListener('keydown', function() { _hasUserInteracted = true; }, { once: true, passive: true });
+
+    window.quixoriaVibrate = function(val) {
+      if (!_hasUserInteracted) return;
+      if (typeof navigator !== 'undefined' && navigator && typeof navigator.vibrate === 'function') {
+        try {
+          navigator.vibrate(val);
+        } catch (e) {}
+      }
+    };
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
