@@ -1,0 +1,99 @@
+<!-- ========================================================================
+     QUIXORIA • ROYAL VERIFICATION EMAIL TEMPLATE (Supabase Confirm Sign Up)
+     Paste this into: Supabase Dashboard -> Authentication -> Emails ->
+     "Confirm sign up" -> switch to "Source" tab -> Save!
+     Recommended Subject: ✨ Your Quixoria Realm Key ({{ .Token }}) — 650 Gems Await!
+     ======================================================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Quixoria</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F4F0E8;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1A1C19;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#F4F0E8;padding:32px 14px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:540px;background-color:#FAF8F4;border-radius:24px;overflow:hidden;border:2px solid #DFCFAF;box-shadow:0 12px 32px rgba(30,56,43,0.12);">
+
+          <!-- Royal Emerald & Gold Header -->
+          <tr>
+            <td align="center" style="background:linear-gradient(135deg,#1E382B 0%,#284B39 100%);padding:34px 24px 28px 24px;border-bottom:3px solid #D4A338;">
+              <div style="display:inline-block;padding:8px 18px;border-radius:999px;background-color:rgba(212,163,56,0.18);border:1px solid #D4A338;color:#F6DC8C;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">
+                ★ Royal Scholar Invitation ★
+              </div>
+              <h1 style="margin:0;font-size:28px;font-weight:900;letter-spacing:1.2px;color:#FAF8F4;">
+                QUIXORIA
+              </h1>
+              <p style="margin:6px 0 0 0;font-size:13px;color:#D6E3DB;letter-spacing:0.4px;">
+                Conquer Classic Literature • One Chapter at a Time
+              </p>
+            </td>
+          </tr>
+
+          <!-- Main Body -->
+          <tr>
+            <td style="padding:30px 28px 24px 28px;text-align:center;">
+              <h2 style="margin:0 0 10px 0;font-size:21px;font-weight:800;color:#1E382B;">
+                Your Literary Adventure Is Ready!
+              </h2>
+              <p style="margin:0 0 22px 0;font-size:14.5px;line-height:1.6;color:#4A524D;">
+                Enter the golden verification code below in the Quixoria app to seal your account, activate automatic cloud saves, and claim your welcome rewards.
+              </p>
+
+              <!-- Giant Gold-Framed OTP Code Box -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 auto 22px auto;">
+                <tr>
+                  <td align="center" style="background-color:#FFFFFF;border:2px dashed #D4A338;border-radius:18px;padding:22px 16px;">
+                    <div style="font-size:11px;font-weight:800;letter-spacing:1.8px;color:#A67B18;text-transform:uppercase;margin-bottom:8px;">
+                      Your Verification Code
+                    </div>
+                    <div style="font-size:36px;font-weight:900;letter-spacing:10px;color:#1E382B;font-family:'Courier New',Courier,monospace;">
+                      {{ .Token }}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Rewarding Starter Perks Strip -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#F3EFE6;border-radius:16px;border:1px solid #E4DAC7;margin-bottom:20px;">
+                <tr>
+                  <td width="33%" align="center" style="padding:14px 6px;">
+                    <div style="font-size:20px;margin-bottom:4px;">💎</div>
+                    <div style="font-size:12px;font-weight:800;color:#1E382B;">650 Gems</div>
+                    <div style="font-size:10px;color:#66706A;">Starter Bounty</div>
+                  </td>
+                  <td width="34%" align="center" style="padding:14px 6px;border-left:1px solid #E4DAC7;border-right:1px solid #E4DAC7;">
+                    <div style="font-size:20px;margin-bottom:4px;">📚</div>
+                    <div style="font-size:12px;font-weight:800;color:#1E382B;">42 Classics</div>
+                    <div style="font-size:10px;color:#66706A;">Ready to Quest</div>
+                  </td>
+                  <td width="33%" align="center" style="padding:14px 6px;">
+                    <div style="font-size:20px;margin-bottom:4px;">☁️</div>
+                    <div style="font-size:12px;font-weight:800;color:#1E382B;">Cloud Save</div>
+                    <div style="font-size:10px;color:#66706A;">Always Synced</div>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0;font-size:12px;line-height:1.5;color:#7A827D;">
+                If you didn’t request this code, you can safely ignore this email.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background-color:#EFE9DC;padding:16px 24px;border-top:1px solid #E2D7C3;">
+              <p style="margin:0;font-size:11px;color:#6B6558;">
+                Sent by the Royal Scribes of <strong>Quixoria</strong> • Read Boldly Every Day
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

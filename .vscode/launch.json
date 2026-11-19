@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Quixoria (Brave Browser)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome",
+      "env": {
+        "CHROME_EXECUTABLE": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+      }
+    },
+    {
+      "name": "Quixoria (Edge)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "edge"
+    },
+    {
+      "name": "Quixoria (Chrome)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome"
+    }
+  ]
+}
